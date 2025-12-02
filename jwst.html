@@ -1,19 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>JWST 3D – Modèle NASA | AstroDom-3D</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <title>JWST 3D interactif | AstroDom 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explorez une vue 3D interactive du télescope spatial James Webb (JWST) grâce au viewer Sketchfab, dans l’univers AstroDom 3D." />
 
   <style>
     :root{
-      --bg:#050915;
-      --outer:#090a0f;
-      --inner:#111317;
+      --bg-page:#050915;
+      --bg-outer:#090a0f;
+      --bg-inner:#111317;
       --accent:#ff7b00;
       --accent-soft:#ffb25a;
-      --text:#fdf5e6;
-      --muted:#c7c7c7;
+      --text-main:#ffffff;
+      --text-muted:#c8c8c8;
+      --shadow:0 18px 40px rgba(0,0,0,.65);
+      --radius-outer:24px;
+      --radius-inner:20px;
+      --maxw:1120px;
     }
 
     *{
@@ -25,233 +30,307 @@
     body{
       min-height:100vh;
       margin:0;
-      padding:20px;
-      background:var(--bg);
-      color:var(--text);
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      padding:24px 12px 32px;
+      background:radial-gradient(circle at top, #12192b 0, #050915 55%, #02030a 100%);
+      color:var(--text-main);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
       display:flex;
       justify-content:center;
       align-items:flex-start;
     }
 
-    .page{
+    .jwst-shell{
       width:100%;
-      max-width:1180px;
-      border-radius:24px;
+      max-width:var(--maxw);
+      background:var(--bg-outer);
+      border-radius:var(--radius-outer);
       border:2px solid var(--accent);
-      background:var(--outer);
-      padding:22px;
-      box-shadow:0 20px 50px rgba(0,0,0,.8);
+      box-shadow:var(--shadow);
+      padding:20px;
     }
 
-    .page-inner{
-      border-radius:20px;
+    .jwst-inner{
+      border-radius:var(--radius-inner);
       border:2px solid var(--accent);
-      background:var(--inner);
-      padding:24px 22px 26px;
+      background:var(--bg-inner);
+      padding:26px 22px 30px;
     }
 
-    .tagline{
-      font-size:.78rem;
-      letter-spacing:.18em;
+    /* HEADER */
+    .jwst-header{
+      text-align:center;
+      margin-bottom:22px;
+    }
+
+    .jwst-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 10px;
+      border-radius:999px;
+      background:rgba(255,123,0,0.1);
+      border:1px solid rgba(255,123,0,0.5);
+      font-size:13px;
+      letter-spacing:.06em;
       text-transform:uppercase;
       color:var(--accent-soft);
+      margin-bottom:10px;
+    }
+
+    .jwst-title{
+      font-size:clamp(1.7rem, 1.2rem + 1.2vw, 2.1rem);
+      letter-spacing:.03em;
+      text-transform:uppercase;
       margin-bottom:6px;
     }
 
-    h1{
-      font-size:1.9rem;
-      letter-spacing:.06em;
-      text-transform:uppercase;
-      margin-bottom:10px;
-    }
-
-    .intro{
+    .jwst-subtitle{
       font-size:.98rem;
-      color:var(--muted);
+      color:var(--text-muted);
+    }
+
+    /* TEXTE INTRO */
+    .jwst-intro{
+      margin:20px auto 22px;
+      max-width:780px;
+      font-size:.98rem;
       line-height:1.6;
-      margin-bottom:18px;
+      color:var(--text-muted);
+      text-align:center;
     }
 
-    .details{
-      font-size:.9rem;
-      color:var(--muted);
-      line-height:1.55;
-      margin-bottom:20px;
+    /* BLOC VIEWER */
+    .jwst-viewer-block{
+      margin:0 auto 22px;
     }
 
-    .viewer-frame{
+    .jwst-viewer-label{
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent-soft);
+      margin-bottom:6px;
+      text-align:left;
+    }
+
+    .jwst-viewer-wrapper{
+      position:relative;
       border-radius:18px;
-      border:1px solid var(--accent);
       overflow:hidden;
+      border:1px solid rgba(255,123,0,0.6);
       background:#000;
-      box-shadow:0 18px 40px rgba(0,0,0,.75);
-      margin-bottom:10px;
+      /* ratio approx 16/9, mais s'adapte */
+      aspect-ratio:16 / 9;
+      max-height:640px;
     }
 
-    .viewer-frame iframe{
-      display:block;
+    .jwst-viewer{
+      position:absolute;
+      inset:0;
       width:100%;
-      height:70vh;   /* hauteur desktop */
+      height:100%;
       border:0;
     }
 
-    .hint{
-      font-size:.85rem;
-      color:var(--muted);
-      margin-bottom:4px;
-    }
-
-    .credit{
-      font-size:.8rem;
-      color:#9b9b9b;
-    }
-
-    .buttons{
-      margin-top:22px;
+    /* LÉGENDE SOUS LE VIEWER */
+    .jwst-caption{
+      margin-top:10px;
+      font-size:.86rem;
+      color:var(--text-muted);
       display:flex;
       flex-wrap:wrap;
-      gap:12px;
-      justify-content:center;
+      gap:6px;
+      align-items:center;
+      justify-content:space-between;
     }
 
-    .btn{
+    .jwst-caption span{
+      opacity:.9;
+    }
+
+    .jwst-caption a{
+      color:var(--accent-soft);
+      text-decoration:none;
+      border-bottom:1px dotted rgba(255,178,90,.5);
+    }
+    .jwst-caption a:hover{
+      border-bottom-style:solid;
+    }
+
+    /* BOUTONS BAS DE PAGE */
+    .jwst-footer{
+      margin-top:24px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .jwst-btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .jwst-btn{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      padding:8px 20px;
+      gap:8px;
+      padding:9px 16px;
       border-radius:999px;
-      border:2px solid var(--accent);
+      border:1px solid var(--accent-soft);
+      background:linear-gradient(135deg, #201710, #130f0b);
+      color:var(--text-main);
       font-size:.9rem;
       text-decoration:none;
       cursor:pointer;
-      transition:
-        background .2s ease,
-        color .2s ease,
-        box-shadow .2s ease,
-        transform .15s ease;
+      transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+      box-shadow:0 8px 20px rgba(0,0,0,.55);
+      white-space:nowrap;
     }
 
-    .btn-primary{
-      background:var(--accent);
-      color:#050915;
-      box-shadow:0 0 14px rgba(255,123,0,.5);
+    .jwst-btn span{
+      font-size:1.1rem;
     }
 
-    .btn-secondary{
-      background:transparent;
-      color:var(--accent-soft);
-    }
-
-    .btn:hover{
+    .jwst-btn:hover{
       transform:translateY(-1px);
-      box-shadow:0 0 10px rgba(255,123,0,.45);
+      box-shadow:0 12px 26px rgba(0,0,0,.65);
+      background:linear-gradient(135deg, #2a1d10, #1a130c);
     }
 
-    @media(max-width:780px){
+    .jwst-note{
+      font-size:.8rem;
+      color:var(--text-muted);
+      text-align:right;
+      max-width:260px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width:768px){
       body{
-        padding:12px;
+        padding:14px 8px 22px;
       }
-
-      .page{
-        padding:16px;
+      .jwst-shell{
+        padding:14px;
+        border-radius:18px;
       }
-
-      .page-inner{
-        padding:18px 14px 22px;
+      .jwst-inner{
+        padding:18px 14px 20px;
+        border-radius:14px;
       }
-
-      h1{
-        font-size:1.5rem;
-        text-align:center;
-      }
-
-      .intro,
-      .details{
-        text-align:left;
+      .jwst-intro{
         font-size:.94rem;
+        text-align:left;
       }
-
-      .viewer-frame iframe{
-        height:60vh;  /* un peu moins haut sur mobile */
+      .jwst-viewer-wrapper{
+        aspect-ratio:16 / 10;
       }
-
-      .buttons{
+      .jwst-caption{
         flex-direction:column;
+        align-items:flex-start;
       }
+      .jwst-footer{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .jwst-note{
+        text-align:left;
+      }
+    }
 
-      .btn{
+    @media (max-width:480px){
+      .jwst-title{
+        font-size:1.5rem;
+      }
+      .jwst-subtitle{
+        font-size:.9rem;
+      }
+      .jwst-btn{
         width:100%;
+        justify-content:center;
       }
     }
   </style>
 </head>
 <body>
-  <main class="page">
-    <div class="page-inner">
+
+  <main class="jwst-shell">
+    <section class="jwst-inner" aria-labelledby="jwst-title">
 
       <!-- En-tête -->
-      <header>
-        <p class="tagline">ASTRODOM-3D • MODÈLE 3D INTERACTIF</p>
-        <h1>JAMES WEBB SPACE TELESCOPE (JWST)</h1>
-
-        <p class="intro">
-          Manipule le modèle 3D du télescope spatial James&nbsp;Webb (JWST), basé sur les données de la NASA.
-          Fais pivoter l’observatoire, zoome et explore la structure du miroir principal, du pare-soleil
-          et de la plateforme de service.
-        </p>
-
-        <p class="details">
-          Le JWST est un télescope spatial infrarouge placé à environ 1,5&nbsp;million de kilomètres de la Terre,
-          au point de Lagrange&nbsp;L2. Son miroir primaire segmenté de 6,5&nbsp;mètres, son pare-soleil à cinq
-          couches et ses instruments (NIRCam, NIRSpec, MIRI, FGS/NIRISS) lui permettent d’observer les toutes
-          premières galaxies, d’étudier la formation des étoiles et d’analyser l’atmosphère d’exoplanètes lointaines.
+      <header class="jwst-header">
+        <div class="jwst-kicker">
+          <span>AstroDom 3D</span>
+          <span>•</span>
+          <span>James Webb Space Telescope</span>
+        </div>
+        <h1 id="jwst-title" class="jwst-title">JWST en 3D interactive</h1>
+        <p class="jwst-subtitle">
+          Manipulez le télescope spatial James Webb en 3D&nbsp;: rotation, zoom, détails de la structure et du miroir principal.
         </p>
       </header>
 
-      <!-- Visionneuse 3D -->
-      <section>
-        <div class="viewer-frame">
-           title="NASA James Webb Space Telescope – modèle 3D"
-  frameborder="0"
-  allowfullscreen
-  mozallowfullscreen="true"
-  webkitallowfullscreen="true"
-  allow="autoplay; fullscreen; xr-spatial-tracking"
-  xr-spatial-tracking
-  execution-while-out-of-viewport
-  execution-while-not-rendered
-  web-share
-  src="https://sketchfab.com/models/f9e4b03e63624e7aa050a798b63bc9c4/embed">
-</iframe>
+      <!-- Texte d’intro -->
+      <p class="jwst-intro">
+        Cette vue 3D du <strong>James Webb Space Telescope (JWST)</strong> vous permet d’explorer sa structure&nbsp;: miroir segmenté,
+        pare-Soleil en plusieurs couches, plate-forme de service, etc. Utilisez la souris ou le tactile pour
+        faire pivoter le modèle, zoomer et découvrir l’ingénierie incroyable derrière le successeur de Hubble.
+      </p>
+
+      <!-- Bloc Viewer Sketchfab -->
+      <section class="jwst-viewer-block" aria-label="Viewer 3D JWST">
+        <p class="jwst-viewer-label">Viewer 3D – Sketchfab</p>
+
+        <div class="jwst-viewer-wrapper">
+          <!-- IFRAME SKETCHFAB CORRECT -->
+          <iframe
+            title="James Webb Space Telescope – Vue 3D interactive"
+            class="jwst-viewer"
+            src="https://sketchfab.com/models/f9e4b03e63624e7aa050a798b63bc9c4/embed"
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share>
+          </iframe>
         </div>
 
-        <p class="hint">
-          💡 Astuce&nbsp;: clique-glisse (ou ton doigt sur mobile) pour faire pivoter le télescope, utilise
-          la molette ou le pincement pour zoomer. Tu peux aussi passer en plein écran directement dans la visionneuse.
-        </p>
-
-        <p class="credit">
-          Modèle 3D&nbsp;: NASA James&nbsp;Webb Space Telescope, adaptation par Space&nbsp;Explorers&nbsp;Academy sur
-          Sketchfab (licence Creative&nbsp;Commons CC&nbsp;BY-NC). Utilisation non commerciale pour AstroDom&nbsp;Exploration.
-        </p>
+        <div class="jwst-caption">
+          <span>
+            Modèle 3D affiché via Sketchfab. Faites pivoter, zoomez et explorez JWST librement.
+          </span>
+          <span>
+            <a href="https://sketchfab.com/models/f9e4b03e63624e7aa050a798b63bc9c4"
+               target="_blank"
+               rel="noopener noreferrer">
+              Voir le modèle directement sur Sketchfab
+            </a>
+          </span>
+        </div>
       </section>
 
-      <!-- Boutons bas de page -->
-      <footer class="buttons">
-        <a href="https://astrodomexploration.com/"
-           class="btn btn-secondary">
-          ⬅️ Retour site AstroDom
-        </a>
+      <!-- Bas de page : boutons -->
+      <footer class="jwst-footer">
+        <div class="jwst-btns">
+          <!-- Retour vers AstroDom (Hostinger) -->
+          <a href="https://astrodomexploration.com/"
+             class="jwst-btn"
+             target="_blank"
+             rel="noopener noreferrer">
+            <span>⬅️</span>
+            <span>Retour à l’accueil AstroDom</span>
+          </a>
+        </div>
 
-        <!-- adapte l’URL ci-dessous si ta page contexte JWST a un autre chemin -->
-        <a href="https://astrodomexploration.com/jwst"
-           class="btn btn-primary">
-          📘 Page JWST – Contexte complet
-        </a>
+        <p class="jwst-note">
+          Page statique compatible GitHub Pages &amp; Hostinger, avec styles intégrés dans ce seul fichier <code>jwst.html</code>.
+        </p>
       </footer>
 
-    </div>
+    </section>
   </main>
+
 </body>
 </html>
