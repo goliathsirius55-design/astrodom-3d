@@ -121,18 +121,25 @@
 
     /* BOUTONS */
     .buttons{
-      margin-top:30px;
+      margin-top:34px;
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
     }
 
     .btn{
-      display:inline-block;
-      padding:10px 18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:10px 20px;
       border-radius:999px;
       border:2px solid #ffb25a;
       background:#1a1e2c;
       text-decoration:none;
       color:#fff;
       font-size:0.95rem;
+      min-width:200px;
     }
 
     .btn:hover{
@@ -156,8 +163,9 @@
     <h1>James Webb Space Telescope (JWST)</h1>
 
     <p>
-      Manipule le modèle 3D du télescope spatial James Webb (JWST), fais pivoter la structure, zoome et explore
-      les éléments du pare-soleil, du miroir primaire et des instruments scientifiques.
+      Manipule le modèle 3D du télescope spatial James Webb (JWST), explore sa structure,
+      fais pivoter la scène, zoome, et découvre le miroir principal, le pare-soleil à cinq couches
+      et les instruments scientifiques infrarouges.
     </p>
 
     <!-- VIEWER -->
@@ -183,54 +191,54 @@
 
         <div class="legend-item">
           <div class="legend-num">1</div>
-          <div class="legend-text"><strong>Miroir primaire</strong> — miroir doré segmenté (18 hexagones) qui collecte la lumière infrarouge.</div>
+          <div class="legend-text"><strong>Miroir primaire</strong> — miroir doré segmenté composé de 18 hexagones.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">2</div>
-          <div class="legend-text"><strong>Bras de support du miroir secondaire</strong> — structures déployées assurant la stabilité optique.</div>
+          <div class="legend-text"><strong>Bras du miroir secondaire</strong> — structures déployées assurant la stabilité optique.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">3</div>
-          <div class="legend-text"><strong>Miroir secondaire</strong> — renvoie la lumière collectée vers les instruments du JWST.</div>
+          <div class="legend-text"><strong>Miroir secondaire</strong> — redirige la lumière vers les instruments.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">4</div>
-          <div class="legend-text"><strong>Plateforme de service</strong> — électronique, alimentation, gyroscopes, radiateurs.</div>
+          <div class="legend-text"><strong>Plateforme de service</strong> — électronique, gyroscopes, radiateurs.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">5</div>
-          <div class="legend-text"><strong>Pare-soleil (5 couches)</strong> — bouclier thermique en Kapton protégeant les instruments.</div>
+          <div class="legend-text"><strong>Pare-soleil (5 couches)</strong> — protège les instruments et maintient –233°C.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">6</div>
-          <div class="legend-text"><strong>Système de tension</strong> — mécanismes qui tendent les 5 couches du pare-soleil.</div>
+          <div class="legend-text"><strong>Système de tension</strong> — mécanismes qui tendent les membranes Kapton.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">7</div>
-          <div class="legend-text"><strong>Module des instruments</strong> — NIRCam, MIRI, NIRSpec, FGS/NIRISS.</div>
+          <div class="legend-text"><strong>Instruments scientifiques</strong> — NIRCam, MIRI, NIRSpec, FGS/NIRISS.</div>
         </div>
 
         <div class="legend-item">
           <div class="legend-num">8</div>
-          <div class="legend-text"><strong>Radiateurs</strong> — dissipent la chaleur pour maintenir les détecteurs à –233°C.</div>
+          <div class="legend-text"><strong>Radiateurs</strong> — évacuent la chaleur pour l’infrarouge profond.</div>
         </div>
 
       </div>
     </section>
 
-    <!-- SEUL BOUTON -->
+    <!-- BOUTONS CENTRÉS -->
     <div class="buttons">
-      <a href="https://astrodomexploration.com/" class="btn">⬅ Retour site AstroDom</a>
+      <a href="https://astrodomexploration.com/" class="btn">⬅ Retour à l'accueil</a>
+      <a href="https://astrodomexploration.com/modeles-3d-nasa" class="btn">🔭 Modèles 3D – NASA</a>
     </div>
 
   </div>
 
 </body>
 </html>
-
