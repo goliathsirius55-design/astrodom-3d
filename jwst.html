@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>JWST 3D – Modèle NASA</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-  body{
-    margin:0;
-    background:#000;
-    overflow:hidden;
-    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  }
-
-  .msg{
-    position:absolute;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(0,0,0,0.6);
-    color:#ffae4d;
-    padding:10px 20px;
-    border-radius:12px;
-    border:1px solid #ffae4d;
-    font-size:16px;
-  }
-
-  iframe{
-    width:100vw;
-    height:100vh;
-    border:none;
-  }
+    body {
+        margin: 0;
+        background: #000;
+        color: #fff;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .loading {
+        position: absolute;
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.65);
+        padding: 10px 24px;
+        border-radius: 12px;
+        border: 1px solid #ff7b00;
+        font-size: 15px;
+    }
+    iframe {
+        width: 100vw;
+        height: 100vh;
+        border: none;
+    }
 </style>
-</head>
 
+</head>
 <body>
 
-<div class="msg">Chargement du modèle 3D NASA — JWST…</div>
+<div class="loading">Chargement du modèle 3D NASA – JWST…</div>
 
-<!-- 🔭 Visionneuse officielle intégré directement -->
+<!-- IFRAME SKETCHFAB OFFICIEL NASA -->
 <iframe 
-  src="https://solarsystem.nasa.gov/gltf_embed/2372"
-  allowfullscreen
-  mozallowfullscreen="true"
-  webkitallowfullscreen="true">
+    title="James Webb Space Telescope (NASA Official)" 
+    src="https://sketchfab.com/models/3d986105baef4f4ea4ca01206f8fe922/embed?autospin=0&autostart=1&camera=0"
+    allow="fullscreen; xr-spatial-tracking; gyroscope; accelerometer"
+    allowfullscreen>
 </iframe>
 
 </body>
