@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hubble 3D – Modèle NASA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        body{
+            margin:0;
+            background:#000;
+            overflow:hidden;
+            font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+        }
+
+        /* Message centré au cas où le iFrame met du temps */
+        .Msg{
+            position:absolute;
+            top:20px;
+            left:50%;
+            transform:translateX(-50%);
+            background:rgba(0,0,0,0.65);
+            color:#ffae4d;
+            padding:14px 20px;
+            border-radius:10px;
+            border:1px solid #ffae4d;
+            font-size:16px;
+        }
+
+        iframe{
+            width:100vw;
+            height:100vh;
+            border:none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="Msg">Chargement du modèle 3D Hubble…</div>
+
+    <!-- Viewer NASA Hubble -->
+    <iframe 
+        src="https://solarsystem.nasa.gov/gltf_embed/2343"
+        allowfullscreen
+        loading="eager">
+    </iframe>
+
+</body>
+</html>
