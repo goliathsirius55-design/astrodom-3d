@@ -44,8 +44,9 @@
       color:#d2d2d2;
     }
 
+    /* Bloc viewer */
     .viewer-block{
-      margin:28px 0;
+      margin:28px 0 20px;
       border:2px solid #ff7b00;
       border-radius:16px;
       padding:14px;
@@ -58,6 +59,7 @@
       border-radius:12px;
       overflow:hidden;
       border:1px solid #ff7b00;
+      background:#000;
     }
 
     iframe{
@@ -73,6 +75,70 @@
       color:#bfbfbf;
     }
 
+    /* Légende numérotée */
+    .legend-block{
+      margin-top:26px;
+      padding:16px 18px 8px;
+      border-radius:16px;
+      border:1px solid #ff7b00;
+      background:rgba(5,6,12,0.9);
+    }
+
+    .legend-title{
+      font-size:1.05rem;
+      font-weight:600;
+      margin:0 0 10px;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      color:#ffb25a;
+    }
+
+    .legend-intro{
+      font-size:0.9rem;
+      color:#c7c7c7;
+      margin:0 0 12px;
+    }
+
+    .legend-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px 20px;
+    }
+
+    .legend-item{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:6px 0;
+    }
+
+    .legend-num{
+      min-width:26px;
+      height:26px;
+      border-radius:999px;
+      border:2px solid #ff7b00;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.85rem;
+      font-weight:600;
+      background:#1a1e2c;
+      color:#fffaef;
+      box-shadow:0 0 0 1px rgba(0,0,0,0.6);
+    }
+
+    .legend-text{
+      font-size:0.9rem;
+      line-height:1.5;
+      color:#d8d8d8;
+    }
+
+    .legend-text strong{
+      color:#ffb25a;
+      font-weight:600;
+    }
+
+    /* Boutons bas de page */
     .buttons{
       display:flex;
       gap:14px;
@@ -91,6 +157,7 @@
       display:inline-flex;
       align-items:center;
       gap:8px;
+      cursor:pointer;
     }
 
     .btn:hover{
@@ -107,6 +174,9 @@
       }
       .viewer-wrapper{
         aspect-ratio:16/10;
+      }
+      .legend-grid{
+        grid-template-columns:1fr;
       }
     }
   </style>
@@ -140,12 +210,87 @@
       </div>
 
       <p class="note">
-        💡 Astuce : clique-glisse pour faire pivoter le télescope, molette pour zoomer.
+        💡 Astuce : clique-glisse pour faire pivoter le télescope, utilise la molette (ou le pincement sur mobile) pour zoomer.
       </p>
     </div>
 
+    <!-- LÉGENDE DES NUMÉROS -->
+    <section class="legend-block" aria-label="Légende des éléments numérotés du JWST">
+      <h2 class="legend-title">Légende du modèle 3D (numéros 1 à 8)</h2>
+      <p class="legend-intro">
+        Les pastilles numérotées sur le modèle 3D indiquent les principaux éléments du télescope spatial James Webb.
+      </p>
+
+      <div class="legend-grid">
+        <div class="legend-item">
+          <div class="legend-num">1</div>
+          <div class="legend-text">
+            <strong>Miroir primaire segmenté</strong> – le grand miroir doré composé de 18 segments hexagonaux
+            qui collecte la lumière infrarouge des galaxies, étoiles et exoplanètes.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">2</div>
+          <div class="legend-text">
+            <strong>Bras de support du miroir secondaire</strong> – structures déployables qui maintiennent le
+            miroir secondaire à distance critique du miroir primaire tout en restant très stables.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">3</div>
+          <div class="legend-text">
+            <strong>Miroir secondaire</strong> – petit miroir circulaire qui renvoie la lumière collectée par
+            le miroir primaire vers l’intérieur de l’instrumentation.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">4</div>
+          <div class="legend-text">
+            <strong>Plateforme de service (bus spatial)</strong> – le « corps » du JWST : électronique,
+            alimentation, moteurs d’orientation, gyroscopes et systèmes de contrôle thermique.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">5</div>
+          <div class="legend-text">
+            <strong>Pare-soleil à cinq couches</strong> – grand bouclier thermique en Kapton qui protège les
+            instruments du Soleil et maintient des températures inférieures à –200&nbsp;°C.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">6</div>
+          <div class="legend-text">
+            <strong>Système de tension du pare-soleil</strong> – câbles et mécanismes qui déploient et tendent
+            les cinq couches du pare-soleil pour atteindre leur forme opérationnelle.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">7</div>
+          <div class="legend-text">
+            <strong>Module des instruments scientifiques</strong> – zone où se trouvent NIRCam, NIRSpec,
+            MIRI et FGS/NIRISS, chargés de l’imagerie et de la spectroscopie infrarouge.
+          </div>
+        </div>
+
+        <div class="legend-item">
+          <div class="legend-num">8</div>
+          <div class="legend-text">
+            <strong>Radiateurs et dissipateurs thermiques</strong> – panneaux qui évacuent la chaleur résiduelle
+            pour maintenir les instruments à leur température de fonctionnement extrêmement basse.
+          </div>
+        </div>
+      </div>
+    </section>
+
     <p class="note">
-      Modèle 3D : NASA James Webb Space Telescope — adaptation par Space Explorers Academy (Sketchfab).
+      Modèle 3D : NASA James Webb Space Telescope — adaptation par Space Explorers Academy sur Sketchfab.
+      Utilisation non commerciale pour AstroDom Exploration.
     </p>
 
     <div class="buttons">
