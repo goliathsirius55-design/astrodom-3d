@@ -3,242 +3,287 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>James Webb Space Telescope (JWST) – Modèle 3D interactif | AstroDom</title>
+  <title>James Webb Space Telescope (JWST) – Modèle 3D interactif | AstroDom-3D</title>
 
   <style>
-    body{
+    :root{
+      --bg-page:#050915;
+      --bg-outer:#090a0f;
+      --bg-inner:#111317;
+      --accent:#ff7b00;
+      --accent-soft:#ffb25a;
+      --text-main:#ffffff;
+      --text-muted:#c9c9c9;
+    }
+
+    *{
+      box-sizing:border-box;
       margin:0;
       padding:0;
-      background:#0b0f19;
-      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-      color:#fff;
     }
 
-    .wrapper{
+    body{
+      min-height:100vh;
+      margin:0;
+      padding:30px 10px 40px;
+      background:var(--bg-page);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text-main);
+      display:flex;
+      justify-content:center;
+    }
+
+    .jwst3d-outer{
+      width:100%;
       max-width:1100px;
-      margin:40px auto;
-      background:#0d111c;
-      border:3px solid #ff7b00;
-      border-radius:22px;
-      padding:28px 32px 50px;
+      border-radius:24px;
+      border:2px solid var(--accent);
+      background:var(--bg-outer);
+      padding:24px;
+      box-shadow:0 18px 40px rgba(0,0,0,.7);
     }
 
-    .kicker{
-      color:#ffb25a;
+    .jwst3d-inner{
+      border-radius:20px;
+      border:2px solid var(--accent);
+      background:var(--bg-inner);
+      padding:26px 22px 30px;
+    }
+
+    .jwst3d-kicker{
       font-size:0.85rem;
       text-transform:uppercase;
-      letter-spacing:0.15em;
-      margin-bottom:8px;
+      letter-spacing:0.12em;
+      color:var(--accent-soft);
+      margin-bottom:6px;
     }
 
-    h1{
-      font-size:2.1rem;
-      margin-top:0;
-      margin-bottom:10px;
+    .jwst3d-title{
+      font-size:2rem;
+      margin:0 0 10px;
       text-transform:uppercase;
     }
 
-    p{
+    .jwst3d-intro{
+      margin:0 auto 20px;
+      max-width:800px;
+      font-size:0.98rem;
       line-height:1.6;
-      font-size:1rem;
-      color:#d2d2d2;
+      color:var(--text-muted);
     }
 
-    /* VIEWER */
-    .viewer-block{
-      margin:28px 0 20px;
-      border:2px solid #ff7b00;
-      border-radius:16px;
+    /* Viewer */
+    .jwst3d-viewer-block{
+      margin:22px 0 10px;
+      border:2px solid var(--accent);
+      border-radius:18px;
       padding:14px;
       background:#080b12;
     }
 
-    .viewer-wrapper{
+    .jwst3d-viewer-wrapper{
       width:100%;
       aspect-ratio:16/9;
-      border-radius:12px;
+      border-radius:14px;
       overflow:hidden;
-      border:1px solid #ff7b00;
+      border:1px solid var(--accent);
       background:#000;
     }
 
-    iframe{
+    .jwst3d-viewer{
       width:100%;
       height:100%;
       border:0;
       display:block;
     }
 
-    /* LÉGENDE */
-    .legend-block{
+    .jwst3d-note{
+      margin-top:10px;
+      font-size:0.85rem;
+      color:#c7c7c7;
+    }
+
+    /* Légende */
+    .jwst3d-legend{
       margin-top:26px;
       padding:16px 18px 8px;
       border-radius:16px;
-      border:1px solid #ff7b00;
-      background:#111317;
+      border:1px solid var(--accent);
+      background:#151821;
     }
 
-    .legend-title{
+    .jwst3d-legend-title{
       font-size:1.05rem;
-      font-weight:600;
-      margin:0 0 10px;
       text-transform:uppercase;
       letter-spacing:0.08em;
-      color:#ffb25a;
+      color:var(--accent-soft);
+      margin:0 0 10px;
     }
 
-    .legend-grid{
+    .jwst3d-legend-grid{
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px 24px;
     }
 
-    .legend-item{
+    .jwst3d-legend-item{
       display:flex;
       gap:10px;
       padding:4px 0;
+      font-size:0.9rem;
+      color:#e1e1e1;
+      line-height:1.45;
     }
 
-    .legend-num{
+    .jwst3d-num{
       min-width:26px;
       height:26px;
       border-radius:50%;
-      border:2px solid #ff7b00;
+      border:2px solid var(--accent);
       display:flex;
       align-items:center;
       justify-content:center;
       font-size:0.85rem;
       font-weight:600;
       background:#1a1e2c;
-      color:#fffaef;
+      color:#fffaf0;
     }
 
-    .legend-text{
-      font-size:0.9rem;
-      color:#e1e1e1;
-      line-height:1.45;
+    .jwst3d-legend-item strong{
+      color:var(--accent-soft);
     }
 
-    /* BOUTONS */
-    .buttons{
-      margin-top:34px;
+    /* Boutons bas */
+    .jwst3d-buttons{
+      margin-top:30px;
       display:flex;
       justify-content:center;
-      gap:16px;
       flex-wrap:wrap;
+      gap:16px;
     }
 
-    .btn{
+    .jwst3d-btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      min-width:200px;
       padding:10px 20px;
       border-radius:999px;
-      border:2px solid #ffb25a;
+      border:2px solid var(--accent-soft);
       background:#1a1e2c;
+      color:var(--text-main);
       text-decoration:none;
-      color:#fff;
       font-size:0.95rem;
-      min-width:200px;
     }
 
-    .btn:hover{
+    .jwst3d-btn:hover{
       background:#252a3a;
     }
 
-    /* Mobile */
-    @media(max-width:768px){
-      .wrapper{margin:20px;padding:22px;}
-      .viewer-wrapper{aspect-ratio:16/10;}
-      .legend-grid{grid-template-columns:1fr;}
+    @media (max-width:768px){
+      body{
+        padding:20px 6px 30px;
+      }
+      .jwst3d-outer{
+        padding:18px;
+      }
+      .jwst3d-inner{
+        padding:18px 14px 22px;
+      }
+      .jwst3d-title{
+        font-size:1.6rem;
+      }
+      .jwst3d-viewer-wrapper{
+        aspect-ratio:16/10;
+      }
+      .jwst3d-legend-grid{
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="wrapper">
+  <main class="jwst3d-outer">
+    <section class="jwst3d-inner" aria-labelledby="jwst3d-title">
 
-    <div class="kicker">AstroDom-3D • Modèle 3D interactif</div>
-    <h1>James Webb Space Telescope (JWST)</h1>
+      <div class="jwst3d-kicker">AstroDom-3D • Modèle 3D interactif</div>
+      <h1 id="jwst3d-title" class="jwst3d-title">James Webb Space Telescope (JWST)</h1>
 
-    <p>
-      Manipule le modèle 3D du télescope spatial James Webb (JWST), explore sa structure,
-      fais pivoter la scène, zoome, et découvre le miroir principal, le pare-soleil à cinq couches
-      et les instruments scientifiques infrarouges.
-    </p>
+      <p class="jwst3d-intro">
+        Manipule le modèle 3D du télescope spatial <strong>James Webb (JWST)</strong>, explore sa structure,
+        fais pivoter la scène, zoome, et découvre le miroir principal, le pare-soleil à cinq couches
+        et les instruments scientifiques infrarouges. Les numéros indiqués sur le modèle renvoient aux éléments
+        décrits dans la légende ci-dessous.
+      </p>
 
-    <!-- VIEWER -->
-    <div class="viewer-block">
-      <div class="viewer-wrapper">
-        <iframe 
-          title="JWST 3D – Sketchfab"
-          src="https://sketchfab.com/models/f9e4b03e63624e7aa050a798b63bc9c4/embed"
-          allow="autoplay; fullscreen; xr-spatial-tracking"
-          xr-spatial-tracking
-          execution-while-out-of-viewport
-          execution-while-not-rendered
-          web-share>
-        </iframe>
+      <!-- Viewer -->
+      <div class="jwst3d-viewer-block">
+        <div class="jwst3d-viewer-wrapper">
+          <iframe
+            class="jwst3d-viewer"
+            title="JWST 3D – NASA"
+            src="https://sketchfab.com/models/f9e4b03e63624e7aa050a798b63bc9c4/embed"
+            allow="autoplay; fullscreen; xr-spatial-tracking"
+            xr-spatial-tracking
+            execution-while-out-of-viewport
+            execution-while-not-rendered
+            web-share>
+          </iframe>
+        </div>
+        <p class="jwst3d-note">
+          💡 Astuce&nbsp;: clique-glisse pour faire pivoter le télescope, molette (ou pincement sur mobile) pour zoomer.
+        </p>
       </div>
-    </div>
 
-    <!-- LÉGENDE -->
-    <section class="legend-block">
-      <h2 class="legend-title">Légende des éléments numérotés</h2>
-
-      <div class="legend-grid">
-
-        <div class="legend-item">
-          <div class="legend-num">1</div>
-          <div class="legend-text"><strong>Miroir primaire</strong> — miroir doré segmenté composé de 18 hexagones.</div>
+      <!-- Légende -->
+      <div class="jwst3d-legend">
+        <h2 class="jwst3d-legend-title">Légende des éléments numérotés</h2>
+        <div class="jwst3d-legend-grid">
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">1</div>
+            <div><strong>Miroir primaire</strong> — miroir doré segmenté (18 hexagones) qui collecte la lumière.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">2</div>
+            <div><strong>Bras du miroir secondaire</strong> — structures déployées assurant la stabilité optique.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">3</div>
+            <div><strong>Miroir secondaire</strong> — renvoie la lumière vers les instruments.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">4</div>
+            <div><strong>Plateforme de service</strong> — électronique, alimentation, gyroscopes, radiateurs.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">5</div>
+            <div><strong>Pare-soleil (5 couches)</strong> — bouclier thermique en Kapton maintenant des températures très basses.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">6</div>
+            <div><strong>Système de tension</strong> — mécanismes qui tendent les membranes du pare-soleil.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">7</div>
+            <div><strong>Instruments scientifiques</strong> — NIRCam, MIRI, NIRSpec, FGS/NIRISS.</div>
+          </div>
+          <div class="jwst3d-legend-item">
+            <div class="jwst3d-num">8</div>
+            <div><strong>Radiateurs</strong> — dissipent la chaleur pour l’observation en infrarouge.</div>
+          </div>
         </div>
-
-        <div class="legend-item">
-          <div class="legend-num">2</div>
-          <div class="legend-text"><strong>Bras du miroir secondaire</strong> — structures déployées assurant la stabilité optique.</div>
-        </div>
-
-        <div class="legend-item">
-          <div class="legend-num">3</div>
-          <div class="legend-text"><strong>Miroir secondaire</strong> — redirige la lumière vers les instruments.</div>
-        </div>
-
-        <div class="legend-item">
-          <div class="legend-num">4</div>
-          <div class="legend-text"><strong>Plateforme de service</strong> — électronique, gyroscopes, radiateurs.</div>
-        </div>
-
-        <div class="legend-item">
-          <div class="legend-num">5</div>
-          <div class="legend-text"><strong>Pare-soleil (5 couches)</strong> — protège les instruments et maintient –233°C.</div>
-        </div>
-
-        <div class="legend-item">
-          <div class="legend-num">6</div>
-          <div class="legend-text"><strong>Système de tension</strong> — mécanismes qui tendent les membranes Kapton.</div>
-        </div>
-
-        <div class="legend-item">
-          <div class="legend-num">7</div>
-          <div class="legend-text"><strong>Instruments scientifiques</strong> — NIRCam, MIRI, NIRSpec, FGS/NIRISS.</div>
-        </div>
-
-        <div class="legend-item">
-          <div class="legend-num">8</div>
-          <div class="legend-text"><strong>Radiateurs</strong> — évacuent la chaleur pour l’infrarouge profond.</div>
-        </div>
-
       </div>
+
+      <!-- Boutons -->
+      <div class="jwst3d-buttons">
+        <a href="https://astrodomexploration.com/" class="jwst3d-btn">⬅ Retour à l’accueil</a>
+        <a href="https://astrodomexploration.com/modeles-3d-nasa" class="jwst3d-btn">🔭 Modèles 3D – NASA</a>
+      </div>
+
     </section>
-
-    <!-- BOUTONS CENTRÉS -->
-    <div class="buttons">
-      <a href="https://astrodomexploration.com/" class="btn">⬅ Retour à l'accueil</a>
-      <a href="https://astrodomexploration.com/modeles-3d-nasa" class="btn">🔭 Modèles 3D – NASA</a>
-    </div>
-
-  </div>
+  </main>
 
 </body>
 </html>
