@@ -2,10 +2,177 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Astrodom-3D – Test</title>
+  <title>ISS en 3D – AstroDom-3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root{
+      --bg:#050915;
+      --panel:#090a0f;
+      --inner:#111317;
+      --accent:#ff7b00;
+      --text:#f7f7f7;
+      --muted:#c5c5c5;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+
+    body{
+      min-height:100vh;
+      background:radial-gradient(circle at top,#101626,#050915 55%);
+      color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+      display:flex;
+      justify-content:center;
+      padding:24px 10px;
+    }
+
+    .iss-page{
+      width:100%;
+      max-width:1180px;
+      border-radius:24px;
+      border:2px solid var(--accent);
+      background:var(--panel);
+      padding:22px;
+      box-shadow:0 18px 40px rgba(0,0,0,.7);
+    }
+
+    .iss-inner{
+      border-radius:20px;
+      border:2px solid var(--accent);
+      background:var(--inner);
+      padding:24px 20px 26px;
+    }
+
+    h1{
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:1.9rem;
+      margin-bottom:6px;
+      color:var(--accent);
+    }
+
+    .iss-sub{
+      font-size:.95rem;
+      color:var(--muted);
+      margin-bottom:18px;
+    }
+
+    .iss-tag{
+      display:inline-block;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:var(--accent);
+      margin-bottom:8px;
+    }
+
+    .iss-iframe-wrap{
+      margin-top:12px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid var(--accent);
+      background:#000;
+      box-shadow:0 14px 32px rgba(0,0,0,.8);
+    }
+
+    iframe{
+      width:100%;
+      height:640px;
+      border:0;
+      display:block;
+    }
+
+    .iss-note{
+      margin-top:14px;
+      font-size:.8rem;
+      color:var(--muted);
+      line-height:1.4;
+    }
+
+    .btn-row{
+      margin-top:20px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      justify-content:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 18px;
+      border-radius:999px;
+      border:2px solid var(--accent);
+      background:#050915;
+      color:var(--text);
+      font-size:.9rem;
+      text-decoration:none;
+      transition:.18s ease-in-out;
+    }
+
+    .btn-primary{
+      background:var(--accent);
+      color:#000;
+      box-shadow:0 0 12px rgba(255,123,0,.45);
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 0 10px rgba(255,123,0,.45);
+    }
+
+    @media(max-width:768px){
+      body{padding:14px 6px;}
+      .iss-page{padding:18px;}
+      .iss-inner{padding:18px 14px 20px;}
+      h1{font-size:1.5rem;}
+      iframe{height:460px;}
+    }
+
+    @media(max-width:480px){
+      iframe{height:380px;}
+      .btn-row{flex-direction:column;}
+      .btn{width:100%;max-width:320px;}
+    }
+  </style>
 </head>
-<body style="background:#050915;color:#fff;font-family:system-ui;text-align:center;padding-top:80px;">
-  <h1>AstroDom-3D est en ligne 🚀</h1>
-  <p>Si tu vois ce message, GitHub Pages fonctionne.</p>
+
+<body>
+  <main class="iss-page">
+    <section class="iss-inner">
+      <div class="iss-tag">AstroDom-3D • Modèle officiel</div>
+      <h1>Station spatiale internationale en 3D</h1>
+      <p class="iss-sub">
+        Manipule le modèle 3D de la Station spatiale internationale tel que fourni par la NASA&nbsp;:
+        fais pivoter, zoome et change l’angle de vue directement dans la fenêtre ci-dessous.
+      </p>
+
+      <div class="iss-iframe-wrap">
+        <iframe
+          src="https://solarsystem.nasa.gov/gltf_embed/2378/"
+          loading="lazy"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <p class="iss-note">
+        💡 Astuce&nbsp;: clique-glisse avec la souris (ou ton doigt sur mobile) pour faire pivoter l’ISS.
+        Utilise la molette ou le pincement pour zoomer. Le modèle est chargé depuis les serveurs de la NASA
+        (Solar System Exploration).
+      </p>
+
+      <div class="btn-row">
+        <a href="https://astrodomexploration.com" target="_blank" class="btn">
+          🏠 Retour site AstroDom
+        </a>
+        <a href="https://astrodomexploration.com/station-spatiale-internationale"
+           target="_blank" class="btn btn-primary">
+          🔭 Page ISS – Contexte complet
+        </a>
+      </div>
+    </section>
+  </main>
 </body>
 </html>
