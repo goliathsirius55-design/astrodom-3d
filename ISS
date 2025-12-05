@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ISS 3D – Modèle NASA | AstroDom Exploration</title>
+
+  <style>
+    :root{
+      --accent:#ff7b00;
+      --bg1:#050608;
+      --bg2:#0e1014;
+      --text:#ffffff;
+      --muted:#cfcfcf;
+    }
+
+    body{
+      margin:0;
+      padding:0;
+      background:#1b1f27;
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--text);
+    }
+
+    /* WRAPPER GLOBAL */
+    .iss3d-wrapper{
+      display:flex;
+      justify-content:center;
+      padding:40px 12px 60px;
+    }
+
+    /* DOUBLE CADRE */
+    .iss3d-outer{
+      width:100%;
+      max-width:1180px;
+      border:2px solid var(--accent);
+      border-radius:24px;
+      background:var(--bg1);
+      padding:24px;
+    }
+
+    .iss3d-inner{
+      border:2px solid var(--accent);
+      border-radius:20px;
+      background:var(--bg2);
+      padding:28px 22px 34px;
+    }
+
+    /* TITRE */
+    .iss3d-title{
+      text-align:center;
+      font-size:2rem;
+      text-transform:uppercase;
+      letter-spacing:0.15em;
+      color:var(--accent);
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    .iss3d-sub{
+      text-align:center;
+      font-size:1rem;
+      color:var(--muted);
+      margin-bottom:24px;
+    }
+
+    /* IFRAME */
+    .iss3d-frame-wrapper{
+      width:100%;
+      overflow:hidden;
+      border-radius:14px;
+      border:2px solid var(--accent);
+      box-shadow:0 0 20px rgba(0,0,0,0.45);
+    }
+
+    .iss3d-iframe{
+      width:100%;
+      height:620px;
+      border:none;
+    }
+
+    /* ASTUCE */
+    .iss3d-tip{
+      text-align:center;
+      margin-top:10px;
+      font-size:0.85rem;
+      color:var(--muted);
+    }
+
+    /* BOUTONS */
+    .iss3d-btns{
+      margin-top:30px;
+      display:flex;
+      justify-content:center;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    .iss3d-btn{
+      padding:0.7rem 1.5rem;
+      border-radius:999px;
+      border:2px solid var(--accent);
+      background:#000;
+      color:#fff;
+      text-decoration:none;
+      font-weight:700;
+      transition:0.2s ease;
+    }
+
+    .iss3d-btn:hover{
+      background:rgba(255,123,0,0.2);
+      transform:translateY(-2px);
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:680px){
+      .iss3d-iframe{
+        height:460px;
+      }
+      .iss3d-title{
+        font-size:1.6rem;
+      }
+    }
+
+    @media(max-width:480px){
+      .iss3d-iframe{
+        height:380px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="iss3d-wrapper">
+  <div class="iss3d-outer">
+    <div class="iss3d-inner">
+
+      <h1 class="iss3d-title">ISS 3D – Modèle NASA</h1>
+      <div class="iss3d-sub">Modèle 3D interactif · Station Spatiale Internationale</div>
+
+      <!-- IFRAME SKETCHFAB -->
+      <div class="iss3d-frame-wrapper">
+        <iframe
+          class="iss3d-iframe"
+          title="ISS – NASA"
+          allow="autoplay; fullscreen; xr-spatial-tracking"
+          xr-spatial-tracking
+          execution-while-out-of-viewport
+          execution-while-not-rendered
+          web-share
+          src="https://sketchfab.com/models/3e0b7cabc5f14a08a3b6d19db24d8132/embed">
+        </iframe>
+      </div>
+
+      <div class="iss3d-tip">💡 Astuce : clique-glisse pour pivoter le modèle · Molette ou pincement pour zoomer</div>
+
+      <!-- BOUTONS -->
+      <div class="iss3d-btns">
+        <a class="iss3d-btn" href="https://astrodomexploration.com/" target="_blank">⬅️ Retour à l’accueil</a>
+        <a class="iss3d-btn" href="https://astrodomexploration.com/modeles-3d-nasa" target="_blank">🛰️ Modèles 3D – NASA</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
